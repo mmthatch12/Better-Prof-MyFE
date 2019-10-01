@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios'
 
 import Avatar from '@material-ui/core/Avatar';
@@ -53,10 +53,25 @@ const useStyles = makeStyles(theme => ({
 
 export default function Register() {
   const classes = useStyles();
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({first_name: '', last_name: '', username: '', password: ''})
+  console.log(user)
 
+  const handleSubmit = event => {
+    event.preventDefault()
+    axios.post(`https://better-professor-backend.herokuapp.com/users/register`, user)
+        .then(res => {
+            console.log(res)
+        })
+}
 
-  axios.post(`https://better-professor-backend.herokuapp.com/users/register`,  )
+  
+
+  const handleChange = event => {
+      event.preventDefault()
+      setUser({ ...user, [event.target.name]: event.target.value})
+  }
+
+  
 
   return (
     <Container component="main" maxWidth="xs">
@@ -68,16 +83,17 @@ export default function Register() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fname"
-                name="firstName"
+                name="first_name"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
+                id="first_name"
+                onChange={handleChange}
                 label="First Name"
                 autoFocus
               />
@@ -87,9 +103,10 @@ export default function Register() {
                 variant="outlined"
                 required
                 fullWidth
-                id="lastName"
+                id="last_name"
                 label="Last Name"
-                name="lastName"
+                name="last_name"
+                onChange={handleChange}
                 autoComplete="lname"
               />
             </Grid>
@@ -99,6 +116,7 @@ export default function Register() {
                 required
                 fullWidth
                 id="username"
+                onChange={handleChange}
                 label="Username"
                 name="username"
                 autoComplete="username"
@@ -111,6 +129,7 @@ export default function Register() {
                 fullWidth
                 name="password"
                 label="Password"
+                onChange={handleChange}
                 type="password"
                 id="password"
                 autoComplete="current-password"
