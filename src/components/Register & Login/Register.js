@@ -51,16 +51,16 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Register() {
+export default function Register(props) {
   const classes = useStyles();
   const [user, setUser] = useState({first_name: '', last_name: '', username: '', password: ''})
-  console.log(user)
 
   const handleSubmit = event => {
     event.preventDefault()
     axios.post(`https://better-professor-backend.herokuapp.com/users/register`, user)
         .then(res => {
             console.log(res)
+            props.history.push('/')
         })
 }
 
