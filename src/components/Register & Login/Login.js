@@ -51,18 +51,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Login() {
+export default function Login(props) {
   const classes = useStyles();
   const [login, setLogin] = useState({ username: '', password: ''})
-  console.log(login)
 
   const handleSubmit = e => {
       e.preventDefault()
     axios.post(`https://better-professor-backend.herokuapp.com/users/login`, login)
         .then(res => {
-            console.log(res)
-            localStorage.setItem(res.data.token)
-            localStorage.setItem(res.data.id)
+            localStorage.setItem('token', res.data.token)
+            localStorage.setItem('id', res.data.id)
+            props.history.push('/studentlist')
         })
         .catch(err => {
             console.log(err.response)
@@ -120,7 +119,7 @@ export default function Login() {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            Log In
           </Button>
           <Grid container justify="flex-end">
             <Grid item>

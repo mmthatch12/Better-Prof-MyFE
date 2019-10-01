@@ -5,6 +5,7 @@ import Login from './components/Register & Login/Login'
 import Register from './components/Register & Login/Register'
 import StudentList from './components/Professor/StudentList'
 
+
 function App() {
   const [list, setList] = useState([])
 
@@ -12,7 +13,7 @@ function App() {
     <div className="App">
       <Route exact path='/' component={Login} />
       <Route path='/register' component={Register} />
-      <Route path='/studentlist/user/:id' render={props =>
+      <Route exact path='/studentlist' render={props =>
         <StudentList {...props} list={list} setList={setList} />}
       />
     </div>

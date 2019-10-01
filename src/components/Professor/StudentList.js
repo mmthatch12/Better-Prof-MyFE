@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import AxiosWithAuth from '../../utils/AxiosWithAuth'
 
 const StudentList = ({ list, setList }) => {
-  const userId = localStorage.getItem(id)
+  const userId = localStorage.getItem('id')
+ 
   
   useEffect(() => {
       AxiosWithAuth().get(`https://better-professor-backend.herokuapp.com/students/user/${userId}`)
@@ -10,9 +11,9 @@ const StudentList = ({ list, setList }) => {
             console.log(res.data)
             setList(res.data)
         })
-  },[])
+  }, [])
 
-  console.log(list)
+  console.log('list', list)
   
   return (
       <h1>From StudentList</h1>
