@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -51,6 +53,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function Register() {
   const classes = useStyles();
+  const [user, setUser] = useState({})
+
+
+  axios.post(`https://better-professor-backend.herokuapp.com/users/register`,  )
 
   return (
     <Container component="main" maxWidth="xs">
