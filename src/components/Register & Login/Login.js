@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios'
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -51,6 +53,27 @@ const useStyles = makeStyles(theme => ({
 
 export default function Login() {
   const classes = useStyles();
+  const [login, setLogin] = useState({ username: '', password: ''})
+  console.log(login)
+
+  const handleSubmit = e => {
+      e.preventDefault()
+    axios.post(`https://better-professor-backend.herokuapp.com/users/login`, login)
+        .then(res => {
+            console.log(res)
+            localStorage.setItem(res.data.token)
+            localStorage.setItem(res.data.id)
+        })
+        .catch(err => {
+            console.log(err.response)
+        })
+  }
+
+  const handleChange = e => {
+      e.preventDefault()
+      setLogin({ ...login, [e.target.name]: e.target.value})
+  }
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -62,7 +85,7 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -71,6 +94,7 @@ export default function Login() {
                 fullWidth
                 id="username"
                 label="Username"
+                onChange={handleChange}
                 name="username"
                 autoComplete="username"
               />
@@ -83,6 +107,7 @@ export default function Login() {
                 name="password"
                 label="Password"
                 type="password"
+                onChange={handleChange}
                 id="password"
                 autoComplete="current-password"
               />

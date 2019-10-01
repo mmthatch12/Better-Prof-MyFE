@@ -62,6 +62,9 @@ export default function Register(props) {
             console.log(res)
             props.history.push('/')
         })
+        .catch(err => {
+            console.log(err.response)
+        })
 }
 
   
