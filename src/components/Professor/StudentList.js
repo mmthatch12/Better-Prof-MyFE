@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import AxiosWithAuth from '../../utils/AxiosWithAuth'
-import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
 
 import StudentCard from './StudentCard'
 
