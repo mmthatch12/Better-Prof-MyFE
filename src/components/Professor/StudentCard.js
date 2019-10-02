@@ -53,10 +53,13 @@ const StudentCard = ({ list }) => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Link to='/studentlist/addproject' style={bStyles}><Button size="small">Projects</Button></Link>
+                                    <Link to='/studentlist/addproject' style={bStyles}><Button size="small">See Projects</Button></Link>
                                 </CardActions>
                                 <CardActions>
-                                    <Button size="small">Messages</Button>
+                                    <Link to='/studentlist/messages' style={bStyles}><Button size="small">See Messages</Button></Link>
+                                </CardActions>
+                                <CardActions>
+                                    <Link to={`/studentlist/edit/${list.id}`} style={bStyles}><Button size="small">Edit Student</Button></Link>
                                 </CardActions>
                             </Card>
                         </Grid>
