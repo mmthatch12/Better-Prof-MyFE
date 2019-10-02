@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import AxiosWithAuth from '../../utils/AxiosWithAuth'
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
+
+import StudentCard from './StudentCard'
 
 const StudentList = ({ list, setList }) => {
   const userId = localStorage.getItem('id')
@@ -12,11 +16,9 @@ const StudentList = ({ list, setList }) => {
             setList(res.data)
         })
   }, [])
-
-  console.log('list', list)
   
   return (
-      <h1>From StudentList</h1>
+    <StudentCard list={list} />
   )
 } 
 
