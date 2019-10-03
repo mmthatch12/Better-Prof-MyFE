@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 
 import Avatar from '@material-ui/core/Avatar';
@@ -39,30 +39,34 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const EditStudent = (props) => {
+    const classes = useStyles()
     const userId = localStorage.getItem('id')
-    const classes = useStyles();
-    const [student, setStudent] = useState({ student_name: '', major: '', user_id: userId})
+
+    const [student, setStudent] = useState({ student: '', major: '', user_id: userId})
     const id = props.match.params.id
     console.log('student', student)
-    const studentId = props.list.find(student => student.id === parseInt(id))
 
-//   const handleSubmit = e => {
-//       e.preventDefault()
-//     axios.post(`https://better-professor-backend.herokuapp.com/users/login`, login)
-//         .then(res => {
-//             localStorage.setItem('token', res.data.token)
-//             localStorage.setItem('id', res.data.id)
-//             props.history.push('/studentlist')
-//         })
-//         .catch(err => {
-//             console.log(err.response)
-//         })
-//   }
+    
 
-//   const handleChange = e => {
-//       e.preventDefault()
-//       setLogin({ ...login, [e.target.name]: e.target.value})
-//   }
+    useEffect(() => {
+        const studentId = props.list.find(student => student.id === parseInt(id))
+        if(studentId) setStudent(studentId)
+    }, [id])
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    axios.put(`https://better-professor-backend.herokuapp.com/students/${id}`, student)
+        .then(res => {
+            props.setStudent([...props.list, student])
+            props.history.push('/studentlist')
+        })
+        .catch(err => console.log(err.response))
+  }
+
+  const handleChange = e => {
+      e.preventDefault()
+      setStudent({ ...student, [e.target.name]: e.target.value})
+  }
 
 
   return (
@@ -75,17 +79,17 @@ const EditStudent = (props) => {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
-                id="student_name"
-                label="Student Name"
-                name="student_name"
-                autoComplete="student_name"
+                id="student"
+                name="student"
+                onChange={handleChange}
+                autoComplete="student"
               />
             </Grid>
             <Grid item xs={12}>
@@ -94,8 +98,8 @@ const EditStudent = (props) => {
                 required
                 fullWidth
                 name="major"
-                label="Major"
                 type="major"
+                onChange={handleChange}
                 id="major"
                 autoComplete="major"
               />
