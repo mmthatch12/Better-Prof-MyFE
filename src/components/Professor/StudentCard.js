@@ -28,7 +28,9 @@ const useStyles = makeStyles({
   });
 
 const StudentCard = ({ list }) => {
-    console.log('list', list)
+    console.log('list.', list)
+
+
 
     let bStyles = {
         textDecoration: 'none'
@@ -59,7 +61,7 @@ const StudentCard = ({ list }) => {
                                     <Link to='/studentlist/messages' style={bStyles}><Button size="small">See Messages</Button></Link>
                                 </CardActions>
                                 <CardActions>
-                                    <Link to={`/studentlist/edit/${list.id}`} style={bStyles}><Button size="small">Edit Student</Button></Link>
+                                    <Link to={`/studentlist/edit/${student.id}`} style={bStyles}><Button size="small">Edit Student</Button></Link>
                                 </CardActions>
                             </Card>
                         </Grid>
