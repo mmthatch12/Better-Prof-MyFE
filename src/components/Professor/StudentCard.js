@@ -8,7 +8,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { NONAME } from 'dns';
+
 
 const useStyles = makeStyles({
     card: {
@@ -48,14 +48,14 @@ const StudentCard = ({ list }) => {
                             <Card className={classes.card}>
                                 <CardContent>
                                     <Typography variant="h5" component="h2">
-                                        {student.student}
+                                        {student.student_name}
                                     </Typography>
                                     <Typography className={classes.title} color="textSecondary" gutterBottom>
                                         {student.major}
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Link to='/studentlist/addproject' style={bStyles}><Button size="small">See Projects</Button></Link>
+                                    <Link to={`/studentlist/addproject/${student.id}`} style={bStyles}><Button size="small">See Projects</Button></Link>
                                 </CardActions>
                                 <CardActions>
                                     <Link to='/studentlist/messages' style={bStyles}><Button size="small">See Messages</Button></Link>
