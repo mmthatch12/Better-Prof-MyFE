@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'
+import AxiosWithAuth from '../../utils/AxiosWithAuth'
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -41,23 +39,22 @@ const useStyles = makeStyles(theme => ({
 const EditStudent = (props) => {
     const classes = useStyles()
     const userId = localStorage.getItem('id')
+    console.log('props', props)
 
-    const [student, setStudent] = useState({ student: '', major: '', user_id: userId})
-    const id = props.match.params.id
-    console.log('student', student)
-
-    
+    const [eStudent, seteStudent] = useState({ student_name: '', major: '', user_id: userId})
+    const id = parseInt(props.match.params.id)
+    console.log('estudent', eStudent, 'id for student', id)
 
     useEffect(() => {
-        const studentId = props.list.find(student => student.id === parseInt(id))
-        if(studentId) setStudent(studentId)
+        const studentId = props.list ? props.list.find(student => student.id === id) : false
+        if(studentId) seteStudent(studentId)
     }, [id])
 
   const handleSubmit = e => {
     e.preventDefault()
-    axios.put(`https://better-professor-backend.herokuapp.com/students/${id}`, student)
+    AxiosWithAuth().put(`https://better-professor-backend.herokuapp.com/students/${id}`, eStudent)
         .then(res => {
-            props.setStudent([...props.list, student])
+            props.setList([...props.list, eStudent])
             props.history.push('/studentlist')
         })
         .catch(err => console.log(err.response))
@@ -65,7 +62,17 @@ const EditStudent = (props) => {
 
   const handleChange = e => {
       e.preventDefault()
-      setStudent({ ...student, [e.target.name]: e.target.value})
+      seteStudent({ ...eStudent, [e.target.name]: e.target.value})
+  }
+
+  const deleteStudent = e => {
+    e.preventDefault()
+    AxiosWithAuth().delete(`https://better-professor-backend.herokuapp.com/students/${id}`)
+      .then(res => {
+        console.log(res)
+        props.history.push('/studentlist')
+      })
+      .catch(err => console.log(err.response))
   }
 
 
@@ -73,11 +80,8 @@ const EditStudent = (props) => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
         <Typography component="h1" variant="h5">
-          Login
+          Edit {eStudent.student}
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit} noValidate>
           <Grid container spacing={2}>
@@ -86,10 +90,9 @@ const EditStudent = (props) => {
                 variant="outlined"
                 required
                 fullWidth
-                id="student"
-                name="student"
+                id="student_name"
+                name="student_name"
                 onChange={handleChange}
-                autoComplete="student"
               />
             </Grid>
             <Grid item xs={12}>
@@ -101,7 +104,6 @@ const EditStudent = (props) => {
                 type="major"
                 onChange={handleChange}
                 id="major"
-                autoComplete="major"
               />
             </Grid>
           </Grid>
@@ -114,6 +116,16 @@ const EditStudent = (props) => {
           >
             Submit Changes
           </Button>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={deleteStudent}
+          >
+            Delete Student
+          </Button>
         </form>
       </div>
     </Container>
@@ -123,18 +135,6 @@ const EditStudent = (props) => {
 export default EditStudent
 
 
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
 
 
 
