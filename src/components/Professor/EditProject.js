@@ -38,6 +38,9 @@ const useStyles = makeStyles(theme => ({
 const EditProject = (props) => {
     const classes = useStyles()
     const [eProject, setEProject] = useState([])
+    const id = parseInt(props.match.params.id)
+    console.log(props)
+    // const currProject = 
 
     return (
         <h1>From EditProject</h1>

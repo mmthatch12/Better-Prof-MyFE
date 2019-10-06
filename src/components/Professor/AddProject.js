@@ -43,6 +43,7 @@ const AddProject = (props) => {
             .then(res => {
                 console.log(res.data)
                 setProjects(res.data)
+                props.setProjectList(res.data)
             })
     }, [])
 

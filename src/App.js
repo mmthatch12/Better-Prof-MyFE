@@ -12,6 +12,7 @@ import EditProject from './components/Professor/EditProject'
 
 function App() {
   const [list, setList] = useState([])
+  const [productList, setProjectList] = useState([])
 
   return (
     <div className="App">
@@ -21,9 +22,11 @@ function App() {
         <StudentList {...props} list={list} setList={setList} />}
       />
       <Route exact path='/studentlist/addproject/:id' render={props => 
-        <AddProject {...props} list={list} setList={setList} />}
+        <AddProject {...props} productList={productList} setProjectList={setProjectList} />}
       />
-      <Route exact path='/studentlist/editproject/:id' component={EditProject} />
+      <Route exact path='/studentlist/editproject/:id' render={props => 
+        <EditProject {...props} productList={productList} setProjectList={setProjectList} />}
+      />
       <Route exact path='/studentlist/messages' render={props => 
        <Messages {...props}  list={list} />}
       />
