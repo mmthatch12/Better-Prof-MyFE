@@ -24,7 +24,7 @@ function App() {
       <Route exact path='/studentlist/addproject/:id' render={props => 
         <AddProject {...props} productList={productList} setProjectList={setProjectList} />}
       />
-      <Route exact path='/studentlist/editproject/:id' render={props => 
+      <Route exact path='/studentlist/editproject/:studid/:projid' render={props => 
         <EditProject {...props} productList={productList} setProjectList={setProjectList} />}
       />
       <Route exact path='/studentlist/messages' render={props => 

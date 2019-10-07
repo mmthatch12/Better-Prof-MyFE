@@ -69,7 +69,7 @@ const AddProject = (props) => {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Link to={`/studentlist/editproject/${project.id}`} style={bStyles}><Button size="small">Edit Project</Button></Link>
+                                <Link to={`/studentlist/editproject/${id}/${project.id}`} style={bStyles}><Button size="small">Edit Project</Button></Link>
                             </CardActions>
                         </Card>
                     </Grid>

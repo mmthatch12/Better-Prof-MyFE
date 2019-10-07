@@ -45,29 +45,41 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const defaultProject = { 
+    project_name: '',
+    deadline: '',
+    deadline_type: '',
+    description: '',
+    student_id: ''
+}
+
 const EditProject = (props) => {
+
     const classes = useStyles()
-    const id = parseInt(props.match.params.id)
-    const [eProject, setEProject] = useState({ project_name: '', deadline: Date.now, deadline_type: '', description: '', student_id: id })
-    console.log('props on edit student', props)
-    console.log('ePeProject',eProject)
+    const studId = parseInt(props.match.params.studid)
+    const id = parseInt(props.match.params.projid)
+    const [eProject, setEProject] = useState({ ...defaultProject, student_id: studId })
+
+    console.log('eProject',eProject)
 
     useEffect(() => {
         const currProject = props.productList ? props.productList.find(proj => proj.id === id) : false
         if(currProject) setEProject(currProject)
-    }, [id])
+    }, [props.productList, props.match.params.id])
     
   const handleSubmit = e => {
     e.preventDefault()
     AxiosWithAuth().put(`https://better-professor-backend.herokuapp.com/projects/${id}`, eProject)
         .then(res => {
             console.log(res.data)
+            props.setProjectList(res.data)
+            props.history.push(`/studentlist/addproject/${id}`)
         })
         .catch(err => console.log(err.response))
   }
 
   const handleChange = e => {
-      e.preventDefault()
+      e.persist()
       setEProject({ ...eProject, [e.target.name]: e.target.value})
   }
 
@@ -96,6 +108,7 @@ const EditProject = (props) => {
                   fullWidth
                   id="project_name"
                   name="project_name"
+                  value={eProject.project_name}
                   onChange={handleChange}
                 />
               </Grid>
@@ -105,6 +118,7 @@ const EditProject = (props) => {
                   required
                   name="deadline"
                   type="datetime-local"
+                  value={eProject.deadline}
                   onChange={handleChange}
                   id="datetime-local"
                   className={classes.textField}
@@ -118,6 +132,7 @@ const EditProject = (props) => {
                   variant="outlined"
                   fullWidth
                   name="deadline_type"
+                  value={eProject.deadline_type}
                   type="deadline_type"
                   onChange={handleChange}
                   id="deadline_type"
@@ -128,6 +143,7 @@ const EditProject = (props) => {
                   variant="outlined"
                   fullWidth
                   name="description"
+                  value={eProject.description}
                   type="description"
                   onChange={handleChange}
                   id="description"
