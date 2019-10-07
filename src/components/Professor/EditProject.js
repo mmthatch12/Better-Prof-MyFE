@@ -37,10 +37,14 @@ const useStyles = makeStyles(theme => ({
 
 const EditProject = (props) => {
     const classes = useStyles()
-    const [eProject, setEProject] = useState([])
     const id = parseInt(props.match.params.id)
-    console.log(props)
-    // const currProject = 
+    const [eProject, setEProject] = useState({ project_name: '', deadline: Date.now, deadline_type: '', description: '', student_id: id })
+    console.log('props on edit student', props)
+
+    useEffect(() => {
+        const currProject = props.productList ? props.productList.find(proj => proj.id === id) : false
+        if(currProject) setEProject(currProject)
+    }, [id])
 
     return (
         <h1>From EditProject</h1>
