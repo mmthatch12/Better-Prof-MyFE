@@ -90,6 +90,7 @@ const EditStudent = (props) => {
                 variant="outlined"
                 required
                 fullWidth
+                value={eStudent.student_name}
                 id="student_name"
                 name="student_name"
                 onChange={handleChange}
@@ -100,6 +101,7 @@ const EditStudent = (props) => {
                 variant="outlined"
                 required
                 fullWidth
+                value={eStudent.major}
                 name="major"
                 type="major"
                 onChange={handleChange}
