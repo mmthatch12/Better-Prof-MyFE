@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import AxiosWithAuth from '../../utils/AxiosWithAuth'
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -33,6 +34,15 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
 }));
 
 const EditProject = (props) => {
@@ -40,14 +50,112 @@ const EditProject = (props) => {
     const id = parseInt(props.match.params.id)
     const [eProject, setEProject] = useState({ project_name: '', deadline: Date.now, deadline_type: '', description: '', student_id: id })
     console.log('props on edit student', props)
+    console.log('ePeProject',eProject)
 
     useEffect(() => {
         const currProject = props.productList ? props.productList.find(proj => proj.id === id) : false
         if(currProject) setEProject(currProject)
     }, [id])
+    
+  const handleSubmit = e => {
+    e.preventDefault()
+    AxiosWithAuth().put(`https://better-professor-backend.herokuapp.com/projects/${id}`, eProject)
+        .then(res => {
+            console.log(res.data)
+        })
+        .catch(err => console.log(err.response))
+  }
+
+  const handleChange = e => {
+      e.preventDefault()
+      setEProject({ ...eProject, [e.target.name]: e.target.value})
+  }
+
+  const deleteStudent = e => {
+    e.preventDefault()
+    AxiosWithAuth().delete(`https://better-professor-backend.herokuapp.com/projects/${id}`)
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => console.log(err.response))
+  }
 
     return (
-        <h1>From EditProject</h1>
+        <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Typography component="h1" variant="h5">
+            Edit 
+          </Typography>
+          <form className={classes.form} onSubmit={handleSubmit} noValidate>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="project_name"
+                  name="project_name"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid className={classes.container} item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  name="deadline"
+                  type="datetime-local"
+                  onChange={handleChange}
+                  id="datetime-local"
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  name="deadline_type"
+                  type="deadline_type"
+                  onChange={handleChange}
+                  id="deadline_type"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  name="description"
+                  type="description"
+                  onChange={handleChange}
+                  id="description"
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Submit Changes
+            </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={deleteStudent}
+            >
+              Delete Project
+            </Button>
+          </form>
+        </div>
+      </Container>
     )
 }
 
