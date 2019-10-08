@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import AxiosWithAuth from '../../utils/AxiosWithAuth'
 
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -65,7 +63,7 @@ const EditProject = (props) => {
     useEffect(() => {
         const currProject = props.productList ? props.productList.find(proj => proj.id === id) : false
         if(currProject) setEProject(currProject)
-    }, [props.productList, props.match.params.id])
+    }, [id])
     
   const handleSubmit = e => {
     e.preventDefault()
@@ -73,13 +71,13 @@ const EditProject = (props) => {
         .then(res => {
             console.log(res.data)
             props.setProjectList(res.data)
-            props.history.push(`/studentlist/addproject/${id}`)
+            props.history.push(`/studentlist/addproject/${studId}`)
         })
         .catch(err => console.log(err.response))
   }
 
   const handleChange = e => {
-      e.persist()
+      e.preventDefault()
       setEProject({ ...eProject, [e.target.name]: e.target.value})
   }
 
@@ -88,6 +86,7 @@ const EditProject = (props) => {
     AxiosWithAuth().delete(`https://better-professor-backend.herokuapp.com/projects/${id}`)
       .then(res => {
         console.log(res.data)
+        props.history.push(`/studentlist/addproject/${studId}`)
       })
       .catch(err => console.log(err.response))
   }
@@ -97,7 +96,7 @@ const EditProject = (props) => {
         <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
-            Edit 
+            Edit {eProject.project_name}
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit} noValidate>
             <Grid container spacing={2}>
@@ -116,6 +115,7 @@ const EditProject = (props) => {
                 <TextField
                   variant="outlined"
                   required
+                  fullWidth
                   name="deadline"
                   type="datetime-local"
                   value={eProject.deadline}
