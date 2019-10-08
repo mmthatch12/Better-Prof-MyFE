@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import AxiosWithAuth from '../../utils/AxiosWithAuth'
 
 import StudentCard from './StudentCard'
+import StudentListNav from '../Navs/StudentListNav'
 
 const StudentList = ({ list, setList }) => {
   const userId = localStorage.getItem('id')
@@ -16,7 +17,11 @@ const StudentList = ({ list, setList }) => {
   }, [])
   
   return (
-    <StudentCard list={list} />
+    <>
+      <StudentListNav />
+      <StudentCard list={list} />
+    </>
+    
   )
 } 
 

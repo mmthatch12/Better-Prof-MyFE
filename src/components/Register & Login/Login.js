@@ -61,6 +61,9 @@ export default function Login(props) {
       e.preventDefault()
     axios.post(`https://better-professor-backend.herokuapp.com/users/login`, login)
         .then(res => {
+            const jsonify = res.config.data
+            const usernameO = JSON.parse(jsonify)
+            localStorage.setItem('user', usernameO.username)
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('id', res.data.id)
             props.history.push('/studentlist')
