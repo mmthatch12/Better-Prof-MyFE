@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom'
 import Login from './components/Register & Login/Login'
 import Register from './components/Register & Login/Register'
 import StudentList from './components/Professor/StudentList'
-import AddProject from './components/Professor/AddProject'
+import ProjectList from './components/Professor/ProjectList'
 import Messages from './components/Professor/Messages'
 import EditStudent from './components/Professor/EditStudent'
 import EditProject from './components/Professor/EditProject'
@@ -21,8 +21,8 @@ function App() {
       <Route exact path='/studentlist' render={props =>
         <StudentList {...props} list={list} setList={setList} />}
       />
-      <Route exact path='/studentlist/addproject/:id' render={props => 
-        <AddProject {...props} productList={productList} setProjectList={setProjectList} />}
+      <Route exact path='/studentlist/projectList/:id' render={props => 
+        <ProjectList {...props} productList={productList} setProjectList={setProjectList} />}
       />
       <Route exact path='/studentlist/editproject/:studid/:projid' render={props => 
         <EditProject {...props} productList={productList} setProjectList={setProjectList} />}

@@ -55,7 +55,7 @@ const StudentCard = ({ list }) => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Link to={`/studentlist/addproject/${student.id}`} style={bStyles}><Button size="small">See Projects</Button></Link>
+                                    <Link to={`/studentlist/projectList/${student.id}`} style={bStyles}><Button size="small">See Projects</Button></Link>
                                 </CardActions>
                                 <CardActions>
                                     <Link to='/studentlist/messages' style={bStyles}><Button size="small">See Messages</Button></Link>
