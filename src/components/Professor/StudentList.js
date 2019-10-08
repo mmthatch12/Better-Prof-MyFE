@@ -4,7 +4,7 @@ import AxiosWithAuth from '../../utils/AxiosWithAuth'
 import StudentCard from './StudentCard'
 import StudentListNav from '../Navs/StudentListNav'
 
-const StudentList = ({ list, setList }) => {
+const StudentList = (props) => {
   const userId = localStorage.getItem('id')
  
   
@@ -12,14 +12,14 @@ const StudentList = ({ list, setList }) => {
       AxiosWithAuth().get(`https://better-professor-backend.herokuapp.com/students/user/${userId}`)
         .then(res => {
             console.log(res.data)
-            setList(res.data)
+            props.setList(res.data)
         })
   }, [])
   
   return (
     <>
-      <StudentListNav />
-      <StudentCard list={list} />
+      <StudentListNav props={props} />
+      <StudentCard list={props.list} />
     </>
     
   )
