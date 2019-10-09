@@ -49,40 +49,44 @@ const ProjectList = (props) => {
             })
     }, [])
 
+
     return (
+        
         <>
             <StudentListNav />
-            <Container maxWidth='sm'>
-                <Grid container spacing={3}>
-                    {projects.map(project => {
-                        return (
-                            <Grid key={project.id} item xs>
-                                <Card className={classes.card}>
-                                    <CardContent>
-                                        <Typography variant="h5" component="h2">
-                                            {project.project_name}
-                                        </Typography>
-                                        <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                            Project Type: {project.deadline_type}
-                                        </Typography>
-                                        <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                            Due Date: {project.deadline}
-                                        </Typography>
-                                        <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                            Description: {project.description}
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Link to={`/studentlist/editproject/${id}/${project.id}`} style={bStyles}><Button size="small">Edit Project</Button></Link>
-                                    </CardActions>
-                                </Card>
-                            </Grid>
-                        )
-                    })}
-                </Grid>
-            </Container>
+            {projects.length === 0 ? <h1>This student does not have any projects. To add a project click on the menu at the top right and select add project.</h1> : 
+                <Container maxWidth='sm'>
+                    <Grid container spacing={3}>
+                        {projects.map(project => {
+                            return (
+                                <Grid key={project.id} item xs>
+                                    <Card className={classes.card}>
+                                        <CardContent>
+                                            <Typography variant="h5" component="h2">
+                                                {project.project_name}
+                                            </Typography>
+                                            <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                                Project Type: {project.deadline_type}
+                                            </Typography>
+                                            <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                                Due Date: {project.deadline}
+                                            </Typography>
+                                            <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                                Description: {project.description}
+                                            </Typography>
+                                        </CardContent>
+                                        <CardActions>
+                                            <Link to={`/studentlist/editproject/${id}/${project.id}`} style={bStyles}><Button size="small">Edit Project</Button></Link>
+                                        </CardActions>
+                                    </Card>
+                                </Grid>
+                            )
+                        })}
+                    </Grid>
+                </Container>
+            }
+            
         </>
-
     )
 }
 

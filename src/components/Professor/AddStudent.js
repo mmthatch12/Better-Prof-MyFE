@@ -45,16 +45,15 @@ const AddStudent = (props) => {
     const id = localStorage.getItem('id')
     const [student, setStudent] = useState({...defaultStudent, user_id: id })
 
-    // const handleSubmit = e => {
-    //     e.preventDefault()
-    //     AxiosWithAuth().put(`https://better-professor-backend.herokuapp.com/projects/${id}`, eProject)
-    //         .then(res => {
-    //             console.log(res.data)
-    //             props.setProjectList(res.data)
-    //             props.history.push(`/studentlist/projectList/${studId}`)
-    //         })
-    //         .catch(err => console.log(err.response))
-    //   }
+    const handleSubmit = e => {
+        e.preventDefault()
+        AxiosWithAuth().post(`https://better-professor-backend.herokuapp.com/students`, student)
+            .then(res => {
+                console.log(res.data)
+                props.history.push(`/studentlist`)
+            })
+            .catch(err => console.log(err.response))
+      }
 
     const handleChange = e => {
         e.preventDefault()
@@ -68,7 +67,7 @@ const AddStudent = (props) => {
           <Typography component="h1" variant="h5">
             Add Student
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={handleSubmit} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField

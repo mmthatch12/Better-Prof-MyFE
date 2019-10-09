@@ -33,7 +33,9 @@ function App() {
       <Route exact path='/studentlist/edit/:id' render={props => 
        <EditStudent {...props}  list={list} setList={setList} />}
       />
-      <Route exact path='/studentlist/addstudent' component={AddStudent} />
+      <Route exact path='/studentlist/addstudent' render={props => 
+       <AddStudent {...props}  list={list} setList={setList} />}
+      />
     </div>
   );
 }
