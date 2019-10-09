@@ -44,7 +44,8 @@ const defaultProject = {
 
 const AddProject = (props) => {
     const classes = useStyles()
-    const id = parseInt(props.match.params.id)
+    const id = parseInt(props.match.params.studentId)
+    console.log('id', id)
     const [project, setProject] = useState({...defaultProject, student_id: id })
 
     const handleSubmit = e => {
