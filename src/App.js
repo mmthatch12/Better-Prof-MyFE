@@ -9,6 +9,7 @@ import Messages from './components/Professor/Messages'
 import EditStudent from './components/Professor/EditStudent'
 import EditProject from './components/Professor/EditProject'
 import AddStudent from './components/Professor/AddStudent'
+import AddProject from './components/Professor/AddProject'
 
 function App() {
   const [list, setList] = useState([])
@@ -35,6 +36,9 @@ function App() {
       />
       <Route exact path='/studentlist/addstudent' render={props => 
        <AddStudent {...props}  list={list} setList={setList} />}
+      />
+      <Route exact path='/studentlist/addproject' render={props => 
+       <AddProject {...props}  productList={productList} setProjectList={setProjectList} />}
       />
     </div>
   );

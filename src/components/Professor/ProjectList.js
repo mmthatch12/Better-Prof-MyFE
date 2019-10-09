@@ -11,7 +11,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import StudentListNav from '../Navs/StudentListNav'
+import ProjectListNav from '../Navs/ProjectListNav'
 
 const useStyles = makeStyles({
     card: {
@@ -53,7 +53,7 @@ const ProjectList = (props) => {
     return (
         
         <>
-            <StudentListNav />
+            <ProjectListNav />
             {projects.length === 0 ? <h1>This student does not have any projects. To add a project click on the menu at the top right and select add project.</h1> : 
                 <Container maxWidth='sm'>
                     <Grid container spacing={3}>

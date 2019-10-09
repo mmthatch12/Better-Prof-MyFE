@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import AxiosWithAuth from '../../utils/AxiosWithAuth'
 
 import StudentCard from './StudentCard'

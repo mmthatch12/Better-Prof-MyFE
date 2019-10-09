@@ -18,6 +18,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AddIcon from '@material-ui/icons/Add';
 import TransitEnterexitIcon from '@material-ui/icons/TransitEnterexit';
+import HomeIcon from '@material-ui/icons/Home';
 
 const drawerWidth = 240;
 
@@ -77,7 +78,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function StudentListNav(props) {
+export default function ProjectListNav(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -139,9 +140,13 @@ export default function StudentListNav(props) {
         </div>
         <Divider />
         <List>
-          {['Add Student', 'Logout'].map((text, index) => (
+          {['Add Project', 'Home', 'Logout'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <Link to='/studentlist/addstudent'><AddIcon /></Link> : <Link to='/' onClick={() => localStorage.clear()}><TransitEnterexitIcon /></Link>}</ListItemIcon>
+                <ListItemIcon>{index === 0 ? <Link to='/studentlist/addproject'><AddIcon /></Link> 
+                    : index === 1 ? <Link to='/studentlist'><HomeIcon /></Link> 
+                    : index === 2 ? <Link to='/' onClick={() => localStorage.clear()}><TransitEnterexitIcon /></Link>
+                    : null}
+                </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
