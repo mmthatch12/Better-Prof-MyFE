@@ -53,7 +53,7 @@ const ProjectList = (props) => {
     return (
         
         <>
-            <ProjectListNav />
+            <ProjectListNav id={id} />
             {projects.length === 0 ? <h1>This student does not have any projects. To add a project click on the menu at the top right and select add project.</h1> : 
                 <Container maxWidth='sm'>
                     <Grid container spacing={3}>

@@ -34,30 +34,32 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const defaultStudent = {
-    student_name: '',
-    major: '',
-    user_id: ''
+const defaultProject = {
+    project_name: '',
+    deadline: '',
+    deadline_type: '',
+    description: '',
+    student_id: ''
 }
 
 const AddProject = (props) => {
     const classes = useStyles()
-    const id = localStorage.getItem('id')
-    const [student, setStudent] = useState({...defaultStudent, user_id: id })
+    const id = parseInt(props.match.params.id)
+    const [project, setProject] = useState({...defaultProject, student_id: id })
 
     const handleSubmit = e => {
         e.preventDefault()
-        AxiosWithAuth().post(`https://better-professor-backend.herokuapp.com/students`, student)
+        AxiosWithAuth().post(`https://better-professor-backend.herokuapp.com/projects`, project)
             .then(res => {
                 console.log(res.data)
-                props.history.push(`/studentlist`)
+                props.history.push(`/studentlist/projectList/${id}`)
             })
             .catch(err => console.log(err.response))
       }
 
     const handleChange = e => {
         e.preventDefault()
-        setStudent({ ...student, [e.target.name]: e.target.value})
+        setProject({ ...project, [e.target.name]: e.target.value})
     }
 
     return (
@@ -65,7 +67,7 @@ const AddProject = (props) => {
         <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
-            Add Student
+            Add Project
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit} noValidate>
             <Grid container spacing={2}>
@@ -74,10 +76,10 @@ const AddProject = (props) => {
                   variant="outlined"
                   required
                   fullWidth
-                  id="student_name"
-                  name="student_name"
-                  placeholder='Student Name'
-                  value={student.student_name}
+                  id="project_name"
+                  name="project_name"
+                  placeholder='Project Name'
+                  value={project.project_name}
                   onChange={handleChange}
                 />
               </Grid>
@@ -86,11 +88,43 @@ const AddProject = (props) => {
                   variant="outlined"
                   required
                   fullWidth
-                  name="major"
-                  placeholder='Major'
-                  value={student.major}
+                  name="deadline"
+                  placeholder='Deadline'
+                  value={project.deadline}
                   onChange={handleChange}
-                  id="major"
+                  id="deadline"
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+              <Grid className={classes.container} item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="deadline_type"
+                  placeholder='Project Type'
+                  value={project.deadline_type}
+                  onChange={handleChange}
+                  id="deadline_type"
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+              <Grid className={classes.container} item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="description"
+                  placeholder='Description'
+                  value={project.description}
+                  onChange={handleChange}
+                  id="description"
                   className={classes.textField}
                   InputLabelProps={{
                     shrink: true,
@@ -105,7 +139,7 @@ const AddProject = (props) => {
               color="primary"
               className={classes.submit}
             >
-              Add Student
+              Add Project
             </Button>
           </form>
         </div>

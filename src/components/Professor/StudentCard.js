@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     },
   });
 
-const StudentCard = ({ list }) => {
+const StudentCard = ({ list, setStudId }) => {
     console.log('list.', list)
 
 

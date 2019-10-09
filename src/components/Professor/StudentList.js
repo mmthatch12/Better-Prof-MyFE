@@ -18,8 +18,8 @@ const StudentList = (props) => {
   
   return (
     <>
-      <StudentListNav props={props} />
-      <StudentCard list={props.list} />
+      <StudentListNav />
+      <StudentCard list={props.list} setStudId={props.setStudId} />
     </>
     
   )

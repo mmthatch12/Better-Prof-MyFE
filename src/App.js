@@ -23,7 +23,7 @@ function App() {
         <StudentList {...props} list={list} setList={setList} />}
       />
       <Route exact path='/studentlist/projectList/:id' render={props => 
-        <ProjectList {...props} productList={productList} setProjectList={setProjectList} />}
+        <ProjectList {...props} productList={productList} list={list} setProjectList={setProjectList} />}
       />
       <Route exact path='/studentlist/editproject/:studid/:projid' render={props => 
         <EditProject {...props} productList={productList} setProjectList={setProjectList} />}
@@ -37,8 +37,8 @@ function App() {
       <Route exact path='/studentlist/addstudent' render={props => 
        <AddStudent {...props}  list={list} setList={setList} />}
       />
-      <Route exact path='/studentlist/addproject' render={props => 
-       <AddProject {...props}  productList={productList} setProjectList={setProjectList} />}
+      <Route exact path='/studentlist/addproject/:studentId' render={props => 
+       <AddProject {...props}  productList={productList} list={list} setProjectList={setProjectList} />}
       />
     </div>
   );
