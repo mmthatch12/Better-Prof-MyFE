@@ -14,6 +14,7 @@ import AddProject from './components/Professor/AddProject'
 function App() {
   const [list, setList] = useState([])
   const [productList, setProjectList] = useState([])
+  const [messagesList, setMessagesList] = useState([])
 
   return (
     <div className="App">
@@ -29,7 +30,7 @@ function App() {
         <EditProject {...props} productList={productList} setProjectList={setProjectList} />}
       />
       <Route exact path='/studentlist/messages' render={props => 
-       <Messages {...props}  list={list} />}
+       <Messages {...props}  list={list} messagesList={messagesList} setMessagesList={setMessagesList} />}
       />
       <Route exact path='/studentlist/edit/:id' render={props => 
        <EditStudent {...props}  list={list} setList={setList} />}
