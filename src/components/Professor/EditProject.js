@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import EditProjectNav from '../Navs/EditProjectNav'
+
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
@@ -92,86 +94,89 @@ const EditProject = (props) => {
   }
 
     return (
+      <>
+        <EditProjectNav /> 
         <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
-            Edit {eProject.project_name}
-          </Typography>
-          <form className={classes.form} onSubmit={handleSubmit} noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="project_name"
-                  name="project_name"
-                  value={eProject.project_name}
-                  onChange={handleChange}
-                />
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Typography component="h1" variant="h5">
+              Edit {eProject.project_name}
+            </Typography>
+            <form className={classes.form} onSubmit={handleSubmit} noValidate>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="project_name"
+                    name="project_name"
+                    value={eProject.project_name}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid className={classes.container} item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="deadline"
+                    type="datetime-local"
+                    value={eProject.deadline}
+                    onChange={handleChange}
+                    id="datetime-local"
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    name="deadline_type"
+                    value={eProject.deadline_type}
+                    type="deadline_type"
+                    onChange={handleChange}
+                    id="deadline_type"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    name="description"
+                    value={eProject.description}
+                    type="description"
+                    onChange={handleChange}
+                    id="description"
+                  />
+                </Grid>
               </Grid>
-              <Grid className={classes.container} item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="deadline"
-                  type="datetime-local"
-                  value={eProject.deadline}
-                  onChange={handleChange}
-                  id="datetime-local"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  name="deadline_type"
-                  value={eProject.deadline_type}
-                  type="deadline_type"
-                  onChange={handleChange}
-                  id="deadline_type"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  name="description"
-                  value={eProject.description}
-                  type="description"
-                  onChange={handleChange}
-                  id="description"
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Submit Changes
-            </Button>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={deleteStudent}
-            >
-              Delete Project
-            </Button>
-          </form>
-        </div>
-      </Container>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Submit Changes
+              </Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={deleteStudent}
+              >
+                Delete Project
+              </Button>
+            </form>
+          </div>
+        </Container>
+      </>
     )
 }
 

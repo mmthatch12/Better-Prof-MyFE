@@ -9,6 +9,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import EditProjectNav from '../Navs/EditProjectNav'
+import EditProject from './EditProject';
+
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
@@ -75,60 +78,64 @@ const EditStudent = (props) => {
 
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          Edit {eStudent.student}
-        </Typography>
-        <form className={classes.form} onSubmit={handleSubmit} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                value={eStudent.student_name}
-                id="student_name"
-                name="student_name"
-                onChange={handleChange}
-              />
+    <>
+      <EditProjectNav /> 
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Typography component="h1" variant="h5">
+            Edit {eStudent.student}
+          </Typography>
+          <form className={classes.form} onSubmit={handleSubmit} noValidate>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  value={eStudent.student_name}
+                  id="student_name"
+                  name="student_name"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  value={eStudent.major}
+                  name="major"
+                  type="major"
+                  onChange={handleChange}
+                  id="major"
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                value={eStudent.major}
-                name="major"
-                type="major"
-                onChange={handleChange}
-                id="major"
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Submit Changes
-          </Button>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={deleteStudent}
-          >
-            Delete Student
-          </Button>
-        </form>
-      </div>
-    </Container>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Submit Changes
+            </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={deleteStudent}
+            >
+              Delete Student
+            </Button>
+          </form>
+        </div>
+      </Container>
+    </>
+
   );
 }
 

@@ -39,35 +39,39 @@ const StudentCard = ({ list, setStudId }) => {
     const classes = useStyles();
 
     return (
-        <Container maxWidth='sm'>
-            <Grid container spacing={3}>
-                {list.map(student => {
-                    return (
-                        <Grid key={student.id} item xs>
-                            <Card className={classes.card}>
-                                <CardContent>
-                                    <Typography variant="h5" component="h2">
-                                        {student.student_name}
-                                    </Typography>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        {student.major}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Link to={`/studentlist/projectList/${student.id}`} style={bStyles}><Button size="small">See Projects</Button></Link>
-                                </CardActions>
-                                <CardActions>
-                                    <Link to='/studentlist/messages' style={bStyles}><Button size="small">See Messages</Button></Link>
-                                </CardActions>
-                                <CardActions>
-                                    <Link to={`/studentlist/edit/${student.id}`} style={bStyles}><Button size="small">Edit Student</Button></Link>
-                                </CardActions>
-                            </Card>
-                        </Grid>
-                    )
-                })}
-            </Grid>
-        </Container>
+        <>
+            {list.length === 0 ? <h1>You have not yet added any students. To add a student click on the menu at the top right and select add student.</h1> : 
+                <Container maxWidth='sm'>
+                    <Grid container spacing={3}>
+                        {list.map(student => {
+                            return (
+                                <Grid key={student.id} item xs>
+                                    <Card className={classes.card}>
+                                        <CardContent>
+                                            <Typography variant="h5" component="h2">
+                                                {student.student_name}
+                                            </Typography>
+                                            <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                                {student.major}
+                                            </Typography>
+                                        </CardContent>
+                                        <CardActions>
+                                            <Link to={`/studentlist/projectList/${student.id}`} style={bStyles}><Button size="small">See Projects</Button></Link>
+                                        </CardActions>
+                                        <CardActions>
+                                            <Link to='/studentlist/messages' style={bStyles}><Button size="small">See Messages</Button></Link>
+                                        </CardActions>
+                                        <CardActions>
+                                            <Link to={`/studentlist/edit/${student.id}`} style={bStyles}><Button size="small">Edit Student</Button></Link>
+                                        </CardActions>
+                                    </Card>
+                                </Grid>
+                            )
+                        })}
+                    </Grid>
+                </Container>
+            }
+        </>
     )
 }
 

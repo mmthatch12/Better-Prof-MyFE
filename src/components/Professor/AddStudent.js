@@ -9,6 +9,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import EditProjectNav from '../Navs/EditProjectNav'
+import EditProject from './EditProject';
+
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
@@ -61,55 +64,60 @@ const AddStudent = (props) => {
     }
 
     return (
+      <>
+        <EditProjectNav /> 
         <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
-            Add Student
-          </Typography>
-          <form className={classes.form} onSubmit={handleSubmit} noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="student_name"
-                  name="student_name"
-                  placeholder='Student Name'
-                  value={student.student_name}
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid className={classes.container} item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="major"
-                  placeholder='Major'
-                  value={student.major}
-                  onChange={handleChange}
-                  id="major"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Typography component="h1" variant="h5">
               Add Student
-            </Button>
-          </form>
-        </div>
-      </Container>
+            </Typography>
+            <form className={classes.form} onSubmit={handleSubmit} noValidate>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="student_name"
+                    name="student_name"
+                    placeholder='Student Name'
+                    value={student.student_name}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid className={classes.container} item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="major"
+                    placeholder='Major'
+                    value={student.major}
+                    onChange={handleChange}
+                    id="major"
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                </Grid>
+              </Grid>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Add Student
+              </Button>
+            </form>
+          </div>
+        </Container>
+      </>
+
+        
     )
 }
 
