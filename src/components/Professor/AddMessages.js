@@ -10,7 +10,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import EditProjectNav from '../Navs/EditProjectNav'
-import EditProject from './EditProject';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -37,16 +36,16 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const defaultStudent = {
-    student_name: '',
-    major: '',
-    user_id: ''
+const defaultMessage = {
+    message: '',
+    date: '',
+    student_id: ''
 }
 
-const AddStudent = (props) => {
+const AddMessages = (props) => {
     const classes = useStyles()
-    const id = localStorage.getItem('id')
-    const [student, setStudent] = useState({...defaultStudent, user_id: id })
+    const id = props.match.params.studentId
+    const [student, setStudent] = useState({...defaultMessage, student_id: id })
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -70,7 +69,7 @@ const AddStudent = (props) => {
           <CssBaseline />
           <div className={classes.paper}>
             <Typography component="h1" variant="h5">
-              Add Student
+              Add Message
             </Typography>
             <form className={classes.form} onSubmit={handleSubmit} noValidate>
               <Grid container spacing={2}>
@@ -82,7 +81,7 @@ const AddStudent = (props) => {
                     id="student_name"
                     name="student_name"
                     placeholder='Student Name'
-                    value={student.student_name}
+                    value={student.message}
                     onChange={handleChange}
                   />
                 </Grid>
@@ -93,7 +92,7 @@ const AddStudent = (props) => {
                     fullWidth
                     name="major"
                     placeholder='Major'
-                    value={student.major}
+                    value={student.date}
                     onChange={handleChange}
                     id="major"
                     className={classes.textField}
@@ -122,4 +121,4 @@ const AddStudent = (props) => {
 }
 
 
-export default AddStudent
+export default AddMessages

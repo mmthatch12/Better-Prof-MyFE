@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+
 import AxiosWithAuth from '../../utils/AxiosWithAuth'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import ProjectListNav from '../Navs/ProjectListNav'
+import MessagesListNav from '../Navs/MessagesListNav'
 
 const useStyles = makeStyles({
     card: {
@@ -31,53 +29,44 @@ const useStyles = makeStyles({
   });
 
 const Messages = (props) => {
-    const [projects, setProjects] = useState([])
+    const [messages, setMessages] = useState([])
     let bStyles = {
         textDecoration: 'none'
     }
 
     const classes = useStyles();
 
-    const id = parseInt(props.match.params.id)
+    const id = parseInt(props.match.params.studentId)
 
-    // useEffect(() => {
-    //     AxiosWithAuth().get(`https://better-professor-backend.herokuapp.com/projects/students/${id}`)
-    //         .then(res => {
-    //             console.log(res.data)
-    //             setProjects(res.data)
-    //             props.setProjectList(res.data)
-    //         })
-    // }, [])
+    useEffect(() => {
+        AxiosWithAuth().get(`https://better-professor-backend.herokuapp.com/messages/students/${id}`)
+            .then(res => {
+                console.log(res.data)
+                setMessages(res.data)
+                props.setMessagesList(res.data)
+            })
+    }, [])
 
 
     return (
         
         <>
-            <ProjectListNav id={id} />
-            {projects.length === 0 ? <h1>This student does not have any projects. To add a project click on the menu at the top right and select add project.</h1> : 
+            <MessagesListNav id={id} />
+            {messages.length === 0 ? <h1>This student does not have any messages. To add a message click on the menu at the top right and select add message.</h1> : 
                 <Container maxWidth='sm'>
                     <Grid container spacing={3}>
-                        {projects.map(project => {
+                        {messages.map((message, ind) => {
                             return (
-                                <Grid key={project.id} item xs>
+                                <Grid key={ind} item xs>
                                     <Card className={classes.card}>
                                         <CardContent>
                                             <Typography variant="h5" component="h2">
-                                                {project.project_name}
+                                                {message.message}
                                             </Typography>
                                             <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                                Project Type: {project.deadline_type}
-                                            </Typography>
-                                            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                                Due Date: {project.deadline}
-                                            </Typography>
-                                            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                                Description: {project.description}
+                                                Project Type: {message.date}
                                             </Typography>
                                         </CardContent>
-                                        <CardActions>
-                                            <Link to={`/studentlist/editproject/${id}/${project.id}`} style={bStyles}><Button size="small">Edit Project</Button></Link>
-                                        </CardActions>
                                     </Card>
                                 </Grid>
                             )

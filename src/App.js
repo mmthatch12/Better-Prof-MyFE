@@ -10,6 +10,7 @@ import EditStudent from './components/Professor/EditStudent'
 import EditProject from './components/Professor/EditProject'
 import AddStudent from './components/Professor/AddStudent'
 import AddProject from './components/Professor/AddProject'
+import AddMessages from './components/Professor/AddMessages'
 
 function App() {
   const [list, setList] = useState([])
@@ -29,7 +30,7 @@ function App() {
       <Route exact path='/studentlist/editproject/:studid/:projid' render={props => 
         <EditProject {...props} productList={productList} setProjectList={setProjectList} />}
       />
-      <Route exact path='/studentlist/messages' render={props => 
+      <Route exact path='/studentlist/messages/:studentId' render={props => 
        <Messages {...props}  list={list} messagesList={messagesList} setMessagesList={setMessagesList} />}
       />
       <Route exact path='/studentlist/edit/:id' render={props => 
@@ -40,6 +41,9 @@ function App() {
       />
       <Route exact path='/studentlist/addproject/:studentId' render={props => 
        <AddProject {...props}  productList={productList} list={list} setProjectList={setProjectList} />}
+      />
+      <Route exact path='/studentlist/addmessages/:studentId' render={props => 
+       <AddMessages {...props} list={list} messagesList={messagesList} setMessagesList={setMessagesList} />}
       />
     </div>
   );
