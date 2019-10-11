@@ -45,21 +45,21 @@ const defaultMessage = {
 const AddMessages = (props) => {
     const classes = useStyles()
     const id = props.match.params.studentId
-    const [student, setStudent] = useState({...defaultMessage, student_id: id })
+    const [message, setMessage] = useState({...defaultMessage, student_id: id })
 
     const handleSubmit = e => {
         e.preventDefault()
-        AxiosWithAuth().post(`https://better-professor-backend.herokuapp.com/students`, student)
+        AxiosWithAuth().post(`https://better-professor-backend.herokuapp.com/messages`, message)
             .then(res => {
                 console.log(res.data)
-                props.history.push(`/studentlist`)
+                props.history.push(`/studentlist/messages/${id}`)
             })
             .catch(err => console.log(err.response))
       }
 
     const handleChange = e => {
         e.preventDefault()
-        setStudent({ ...student, [e.target.name]: e.target.value})
+        setMessage({ ...message, [e.target.name]: e.target.value})
     }
 
     return (
@@ -78,10 +78,10 @@ const AddMessages = (props) => {
                     variant="outlined"
                     required
                     fullWidth
-                    id="student_name"
-                    name="student_name"
-                    placeholder='Student Name'
-                    value={student.message}
+                    id="message"
+                    name="message"
+                    placeholder='Message'
+                    value={message.message}
                     onChange={handleChange}
                   />
                 </Grid>
@@ -90,11 +90,11 @@ const AddMessages = (props) => {
                     variant="outlined"
                     required
                     fullWidth
-                    name="major"
-                    placeholder='Major'
-                    value={student.date}
+                    name="date"
+                    placeholder='Date'
+                    value={message.date}
                     onChange={handleChange}
-                    id="major"
+                    id="date"
                     className={classes.textField}
                     InputLabelProps={{
                       shrink: true,
@@ -109,14 +109,12 @@ const AddMessages = (props) => {
                 color="primary"
                 className={classes.submit}
               >
-                Add Student
+                Add Message
               </Button>
             </form>
           </div>
         </Container>
       </>
-
-        
     )
 }
 

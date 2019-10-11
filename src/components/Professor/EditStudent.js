@@ -10,7 +10,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import EditProjectNav from '../Navs/EditProjectNav'
-import EditProject from './EditProject';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
