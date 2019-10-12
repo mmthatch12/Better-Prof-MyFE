@@ -12,6 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+
 
 //I need to do a loading animation
 
@@ -51,16 +54,22 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  progress: {
+    margin: theme.spacing(2),
+  },
 }));
 
 export default function Login(props) {
   const classes = useStyles();
   const [login, setLogin] = useState({ username: '', password: ''})
+  const [isLoading, setIsLoading] = useState( {loading: false} )
 
   const handleSubmit = e => {
       e.preventDefault()
+      setIsLoading( {loading: true} )
     axios.post(`https://better-professor-backend.herokuapp.com/users/login`, login)
         .then(res => {
+            setIsLoading( {loading: false} )
             const jsonify = res.config.data
             const usernameO = JSON.parse(jsonify)
             localStorage.setItem('user', usernameO.username)
