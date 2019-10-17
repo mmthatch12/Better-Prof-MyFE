@@ -94,6 +94,7 @@ const AddMessages = (props) => {
                     placeholder='Date'
                     value={message.date}
                     onChange={handleChange}
+                    type="datetime-local"
                     id="date"
                     className={classes.textField}
                     InputLabelProps={{

@@ -115,7 +115,7 @@ const EditProject = (props) => {
                     onChange={handleChange}
                   />
                 </Grid>
-                <Grid className={classes.container} item xs={12}>
+                <Grid item xs={12}>
                   <TextField
                     variant="outlined"
                     required
@@ -124,11 +124,7 @@ const EditProject = (props) => {
                     type="datetime-local"
                     value={eProject.deadline}
                     onChange={handleChange}
-                    id="datetime-local"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
+                    id="deadline"
                   />
                 </Grid>
                 <Grid item xs={12}>
