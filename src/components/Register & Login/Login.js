@@ -71,16 +71,17 @@ export default function Login(props) {
       setIsLoading(true)
     axios.post(`https://better-professor-backend.herokuapp.com/users/login`, login)
         .then(res => {
-            setIsLoading(false)
             const jsonify = res.config.data
             const usernameO = JSON.parse(jsonify)
             localStorage.setItem('user', usernameO.username)
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('id', res.data.id)
+            setIsLoading(false)
             props.history.push('/studentlist')
         })
         .catch(err => {
             setError(err.response)
+            setIsLoading(false)
         })
   }
 
@@ -89,9 +90,8 @@ export default function Login(props) {
       setLogin({ ...login, [e.target.name]: e.target.value})
   }
 
-
   return (
-    isLoading && error === {}? <CircularProgress className={classes.progress} /> :
+    isLoading ? <CircularProgress className={classes.progress} /> :
     error.status === 401 ? <InvalidCreds /> :
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -155,5 +155,76 @@ export default function Login(props) {
         <Copyright />
       </Box>
     </Container>
+  //   <>
+  //   switch(isLoading) {
+  //     case isLoading && error === {}:
+  //       <CircularProgress className={classes.progress} />;
+  //     case isLoading && error !== {}:
+  //       <InvalidCreds />
+  //     case !isLoading:
+  //         <Container component="main" maxWidth="xs">
+  //         <CssBaseline />
+  //         <div className={classes.paper}>
+  //         <Typography component="h1" variant="h5">
+  //             Student Tracker
+  //           </Typography>
+  //           <Avatar className={classes.avatar}>
+  //             <LockOutlinedIcon />
+  //           </Avatar>
+  //           <Typography component="h1" variant="h5">
+  //             Login
+  //           </Typography>
+  //           <form className={classes.form} onSubmit={handleSubmit} noValidate>
+  //             <Grid container spacing={2}>
+  //               <Grid item xs={12}>
+  //                 <TextField
+  //                   variant="outlined"
+  //                   required
+  //                   fullWidth
+  //                   id="username"
+  //                   label="Username"
+  //                   onChange={handleChange}
+  //                   name="username"
+  //                   autoComplete="username"
+  //                 />
+  //               </Grid>
+  //               <Grid item xs={12}>
+  //                 <TextField
+  //                   variant="outlined"
+  //                   required
+  //                   fullWidth
+  //                   name="password"
+  //                   label="Password"
+  //                   type="password"
+  //                   onChange={handleChange}
+  //                   id="password"
+  //                   autoComplete="current-password"
+  //                 />
+  //               </Grid>
+  //             </Grid>
+  //             <Button
+  //               type="submit"
+  //               fullWidth
+  //               variant="contained"
+  //               color="primary"
+  //               className={classes.submit}
+  //             >
+  //               Log In
+  //             </Button>
+  //             <Grid container justify="flex-end">
+  //               <Grid item>
+  //                 <Link href="/register" variant="body2">
+  //                   Don't have an account yet? Sign up
+  //                 </Link>
+  //               </Grid>
+  //             </Grid>
+  //           </form>
+  //         </div>
+  //         <Box mt={5}>
+  //           <Copyright />
+  //         </Box>
+  //       </Container>
+  //   }
+  // </>
   );
 }
