@@ -14,9 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
-
-//I need to do a loading animation
+import InvalidCreds from './InvalidCreds'
 
 function Copyright() {
   return (
@@ -66,6 +64,7 @@ export default function Login(props) {
   const classes = useStyles();
   const [login, setLogin] = useState({ username: '', password: ''})
   const [isLoading, setIsLoading] = useState( false )
+  const [error, setError] = useState({})
 
   const handleSubmit = e => {
       e.preventDefault()
@@ -73,6 +72,7 @@ export default function Login(props) {
     axios.post(`https://better-professor-backend.herokuapp.com/users/login`, login)
         .then(res => {
             setIsLoading(false)
+            console.log('res.request', res.request)
             const jsonify = res.config.data
             const usernameO = JSON.parse(jsonify)
             localStorage.setItem('user', usernameO.username)
@@ -82,9 +82,7 @@ export default function Login(props) {
         })
         .catch(err => {
           //why doesn't this push back to home screen on err?
-            props.history.push('/')
-            console.log(err.response)
-            
+            setError(err.response)
         })
   }
 
@@ -95,10 +93,14 @@ export default function Login(props) {
 
 
   return (
-    isLoading ? <CircularProgress className={classes.progress} /> :
+    isLoading === true && error === {} ? <CircularProgress className={classes.progress} /> :
+    error.status === 401 ? <InvalidCreds /> :
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+      <Typography component="h1" variant="h5">
+          Student Tracker
+        </Typography>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
