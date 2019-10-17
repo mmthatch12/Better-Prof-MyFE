@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 
 import Avatar from '@material-ui/core/Avatar';
@@ -72,7 +72,6 @@ export default function Login(props) {
     axios.post(`https://better-professor-backend.herokuapp.com/users/login`, login)
         .then(res => {
             setIsLoading(false)
-            console.log('res.request', res.request)
             const jsonify = res.config.data
             const usernameO = JSON.parse(jsonify)
             localStorage.setItem('user', usernameO.username)
@@ -81,7 +80,6 @@ export default function Login(props) {
             props.history.push('/studentlist')
         })
         .catch(err => {
-          //why doesn't this push back to home screen on err?
             setError(err.response)
         })
   }
@@ -93,8 +91,8 @@ export default function Login(props) {
 
 
   return (
-    isLoading === true && error === {} ? <CircularProgress className={classes.progress} /> :
-    error.status === 401 ? <InvalidCreds props={props} /> :
+    isLoading && error === {}? <CircularProgress className={classes.progress} /> :
+    error.status === 401 ? <InvalidCreds /> :
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>

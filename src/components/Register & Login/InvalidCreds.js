@@ -41,9 +41,8 @@ const useStyles = makeStyles(theme => ({
     },
   }))
 
-const InvalidCreds = (props) => {
+const InvalidCreds = () => {
     const classes = useStyles();
-    console.log('props on inval', props.props.history)
 
     const handleSubmit = e => {
         e.preventDefault()
