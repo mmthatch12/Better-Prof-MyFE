@@ -27,10 +27,14 @@ const useStyles = makeStyles({
     pos: {
       marginBottom: 12,
     },
+    progress: {
+        margin: '50vh', 
+      },
   });
 
 const Messages = (props) => {
     const [messages, setMessages] = useState([])
+    const [isLoading, setIsLoading] = useState( false )
     let bStyles = {
         textDecoration: 'none'
     }
@@ -40,9 +44,10 @@ const Messages = (props) => {
     const id = parseInt(props.match.params.studentId)
 
     useEffect(() => {
+        setIsLoading(true)
         AxiosWithAuth().get(`https://better-professor-backend.herokuapp.com/messages/students/${id}`)
             .then(res => {
-                console.log(res.data)
+                setIsLoading(false)
                 setMessages(res.data)
                 props.setMessagesList(res.data)
             })
@@ -53,7 +58,8 @@ const Messages = (props) => {
         
         <>
             <MessagesListNav id={id} />
-            {messages.length === 0 ? <h1>This student does not have any messages. To add a message click on the menu at the top right and select add message.</h1> : 
+            {isLoading ? <CircularProgress className={classes.progress} /> :
+            messages.length === 0 ? <h1>This student does not have any messages. To add a message click on the menu at the top right and select add message.</h1> : 
                 <Container maxWidth='sm'>
                     <Grid container spacing={3}>
                         {messages.map((message, ind) => {
@@ -75,6 +81,8 @@ const Messages = (props) => {
                     </Grid>
                 </Container>
             }
+        }
+            
             
         </>
     )

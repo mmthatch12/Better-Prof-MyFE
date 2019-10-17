@@ -25,7 +25,6 @@ const StudentList = (props) => {
       AxiosWithAuth().get(`https://better-professor-backend.herokuapp.com/students/user/${userId}`)
         .then(res => {
             setIsLoading(false)
-            console.log(res.data)
             props.setList(res.data)
         })
   }, [])
