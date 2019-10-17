@@ -6,7 +6,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import StudentCard from './StudentCard'
 import StudentListNav from '../Navs/StudentListNav'
-import { classes } from 'istanbul-lib-coverage';
 
 const useStyles = makeStyles(() => ({
   progress: {
@@ -36,7 +35,7 @@ const StudentList = (props) => {
     <>
       <StudentListNav />
       {isLoading ? <CircularProgress className={classes.progress} /> :
-      <StudentCard list={props.list} setStudId={props.setStudId} />}
+      <StudentCard list={props.list} />}
     </>
     
   )

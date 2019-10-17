@@ -51,9 +51,7 @@ const AddProject = (props) => {
     const handleSubmit = e => {
         e.preventDefault()
         AxiosWithAuth().post(`https://better-professor-backend.herokuapp.com/projects`, project)
-            .then(res => {
-                props.history.push(`/studentlist/projectList/${id}`)
-            })
+            .then(res => props.history.push(`/studentlist/projectList/${id}`))
             .catch(err => console.log(err.response))
       }
 

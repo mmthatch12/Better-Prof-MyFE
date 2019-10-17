@@ -83,9 +83,7 @@ const EditProject = (props) => {
   const deleteStudent = e => {
     e.preventDefault()
     AxiosWithAuth().delete(`https://better-professor-backend.herokuapp.com/projects/${id}`)
-      .then(res => {
-        props.history.push(`/studentlist/projectList/${studId}`)
-      })
+      .then(res => props.history.push(`/studentlist/projectList/${studId}`))
       .catch(err => console.log(err.response))
   }
 

@@ -64,7 +64,7 @@ const ProjectList = (props) => {
         <>
             <ProjectListNav id={id} />
             {isLoading ? <CircularProgress className={classes.progress} /> :
-        projects.length > 0 ? 
+            projects.length > 0 ? 
             <Container maxWidth='sm'>
                 <Grid container spacing={3}>
                     {projects.map(project => {
@@ -109,9 +109,7 @@ const ProjectList = (props) => {
                 </Grid>
             </Container>
         </> 
-        }
-
-            
+        } 
         </>
     )
 }

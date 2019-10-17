@@ -51,7 +51,6 @@ const AddMessages = (props) => {
         e.preventDefault()
         AxiosWithAuth().post(`https://better-professor-backend.herokuapp.com/messages`, message)
             .then(res => {
-                console.log(res.data)
                 props.history.push(`/studentlist/messages/${id}`)
             })
             .catch(err => console.log(err.response))

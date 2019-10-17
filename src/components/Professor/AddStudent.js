@@ -50,10 +50,7 @@ const AddStudent = (props) => {
     const handleSubmit = e => {
         e.preventDefault()
         AxiosWithAuth().post(`https://better-professor-backend.herokuapp.com/students`, student)
-            .then(res => {
-                console.log(res.data)
-                props.history.push(`/studentlist`)
-            })
+            .then(res => props.history.push(`/studentlist`))
             .catch(err => console.log(err.response))
       }
 

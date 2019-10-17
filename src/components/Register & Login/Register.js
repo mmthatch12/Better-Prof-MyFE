@@ -58,23 +58,14 @@ export default function Register(props) {
   const handleSubmit = event => {
     event.preventDefault()
     axios.post(`https://better-professor-backend.herokuapp.com/users/register`, user)
-        .then(res => {
-            console.log(res)
-            props.history.push('/')
-        })
-        .catch(err => {
-            console.log(err.response)
-        })
-}
-
-  
+        .then(res => props.history.push('/'))
+        .catch(err => console.log(err.response))
+  }
 
   const handleChange = event => {
       event.preventDefault()
       setUser({ ...user, [event.target.name]: event.target.value})
   }
-
-  
 
   return (
     <Container component="main" maxWidth="xs">
