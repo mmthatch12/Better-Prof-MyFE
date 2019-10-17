@@ -92,6 +92,7 @@ const AddProject = (props) => {
                         fullWidth
                         name="deadline"
                         placeholder='Deadline'
+                        type="datetime-local"
                         value={project.deadline}
                         onChange={handleChange}
                         id="deadline"

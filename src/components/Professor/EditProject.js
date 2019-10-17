@@ -60,8 +60,6 @@ const EditProject = (props) => {
     const id = parseInt(props.match.params.projid)
     const [eProject, setEProject] = useState({ ...defaultProject, student_id: studId })
 
-    console.log('eProject',eProject)
-
     useEffect(() => {
         const currProject = props.productList ? props.productList.find(proj => proj.id === id) : false
         if(currProject) setEProject(currProject)
@@ -87,7 +85,6 @@ const EditProject = (props) => {
     e.preventDefault()
     AxiosWithAuth().delete(`https://better-professor-backend.herokuapp.com/projects/${id}`)
       .then(res => {
-        console.log(res.data)
         props.history.push(`/studentlist/projectList/${studId}`)
       })
       .catch(err => console.log(err.response))

@@ -50,7 +50,6 @@ const ProjectList = (props) => {
         AxiosWithAuth().get(`https://better-professor-backend.herokuapp.com/projects/students/${id}`)
             .then(res => {
                 setIsLoading(false)
-                console.log(res.data)
                 setProjects(res.data)
                 props.setProjectList(res.data)
             })
@@ -93,7 +92,7 @@ const ProjectList = (props) => {
                 </Grid>
             </Container> : 
             <h1>This student does not have any projects. To add a project click on the menu at the top right and select add project.</h1>
-        }}
+        }
 
             
         </>

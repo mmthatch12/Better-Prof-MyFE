@@ -81,7 +81,7 @@ const Messages = (props) => {
                     </Grid>
                 </Container>
             }
-        }
+        
             
             
         </>
