@@ -94,7 +94,7 @@ export default function Login(props) {
 
   return (
     isLoading === true && error === {} ? <CircularProgress className={classes.progress} /> :
-    error.status === 401 ? <InvalidCreds /> :
+    error.status === 401 ? <InvalidCreds props={props} /> :
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
