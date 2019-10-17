@@ -81,7 +81,10 @@ export default function Login(props) {
             props.history.push('/studentlist')
         })
         .catch(err => {
+          //why doesn't this push back to home screen on err?
+            props.history.push('/')
             console.log(err.response)
+            
         })
   }
 

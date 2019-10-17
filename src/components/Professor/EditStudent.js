@@ -39,11 +39,9 @@ const useStyles = makeStyles(theme => ({
 const EditStudent = (props) => {
     const classes = useStyles()
     const userId = localStorage.getItem('id')
-    console.log('props', props)
 
     const [eStudent, seteStudent] = useState({ student_name: '', major: '', user_id: userId})
     const id = parseInt(props.match.params.id)
-    console.log('estudent', eStudent, 'id for student', id)
 
     useEffect(() => {
         const studentId = props.list ? props.list.find(student => student.id === id) : false
@@ -69,7 +67,6 @@ const EditStudent = (props) => {
     e.preventDefault()
     AxiosWithAuth().delete(`https://better-professor-backend.herokuapp.com/students/${id}`)
       .then(res => {
-        console.log(res)
         props.history.push('/studentlist')
       })
       .catch(err => console.log(err.response))

@@ -69,7 +69,6 @@ const EditProject = (props) => {
     e.preventDefault()
     AxiosWithAuth().put(`https://better-professor-backend.herokuapp.com/projects/${id}`, eProject)
         .then(res => {
-            console.log(res.data)
             props.setProjectList(res.data)
             props.history.push(`/studentlist/projectList/${studId}`)
         })
