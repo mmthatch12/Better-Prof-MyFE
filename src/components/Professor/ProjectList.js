@@ -10,6 +10,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import ProjectListNav from '../Navs/ProjectListNav'
 
@@ -28,21 +29,27 @@ const useStyles = makeStyles({
     pos: {
       marginBottom: 12,
     },
+    progress: {
+        margin: '50vh', 
+      },
   });
 
 const ProjectList = (props) => {
+    const classes = useStyles();
     const [projects, setProjects] = useState([])
+    const [isLoading, setIsLoading] = useState( false )
+    
     let bStyles = {
         textDecoration: 'none'
     }
 
-    const classes = useStyles();
-
     const id = parseInt(props.match.params.id)
 
     useEffect(() => {
+        setIsLoading(true)
         AxiosWithAuth().get(`https://better-professor-backend.herokuapp.com/projects/students/${id}`)
             .then(res => {
+                setIsLoading(false)
                 console.log(res.data)
                 setProjects(res.data)
                 props.setProjectList(res.data)
@@ -54,37 +61,40 @@ const ProjectList = (props) => {
         
         <>
             <ProjectListNav id={id} />
-            {projects.length === 0 ? <h1>This student does not have any projects. To add a project click on the menu at the top right and select add project.</h1> : 
-                <Container maxWidth='sm'>
-                    <Grid container spacing={3}>
-                        {projects.map(project => {
-                            return (
-                                <Grid key={project.id} item xs>
-                                    <Card className={classes.card}>
-                                        <CardContent>
-                                            <Typography variant="h5" component="h2">
-                                                {project.project_name}
-                                            </Typography>
-                                            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                                Project Type: {project.deadline_type}
-                                            </Typography>
-                                            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                                Due Date: {project.deadline}
-                                            </Typography>
-                                            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                                Description: {project.description}
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <Link to={`/studentlist/editproject/${id}/${project.id}`} style={bStyles}><Button size="small">Edit Project</Button></Link>
-                                        </CardActions>
-                                    </Card>
-                                </Grid>
-                            )
-                        })}
-                    </Grid>
-                </Container>
-            }
+            {isLoading ? <CircularProgress className={classes.progress} /> :
+        projects.length > 0 ? 
+            <Container maxWidth='sm'>
+                <Grid container spacing={3}>
+                    {projects.map(project => {
+                        return (
+                            <Grid key={project.id} item xs>
+                                <Card className={classes.card}>
+                                    <CardContent>
+                                        <Typography variant="h5" component="h2">
+                                            {project.project_name}
+                                        </Typography>
+                                        <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                            Project Type: {project.deadline_type}
+                                        </Typography>
+                                        <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                            Due Date: {project.deadline}
+                                        </Typography>
+                                        <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                            Description: {project.description}
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Link to={`/studentlist/editproject/${id}/${project.id}`} style={bStyles}><Button size="small">Edit Project</Button></Link>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
+                        )
+                    })}
+                </Grid>
+            </Container> : 
+            <h1>This student does not have any projects. To add a project click on the menu at the top right and select add project.</h1>
+        }}
+
             
         </>
     )

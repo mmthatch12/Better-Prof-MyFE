@@ -37,11 +37,11 @@ const StudentCard = ({ list, setStudId }) => {
     }
 
     const classes = useStyles();
+    
 
     return (
         <>
-            {list.length === 0 ? <h1>You have not yet added any students. To add a student click on the menu at the top right and select add student.</h1> : 
-                <Container maxWidth='sm'>
+            {list.length > 0 ?                 <Container maxWidth='sm'>
                     <Grid container spacing={3}>
                         {list.map(student => {
                             return (
@@ -69,7 +69,9 @@ const StudentCard = ({ list, setStudId }) => {
                             )
                         })}
                     </Grid>
-                </Container>
+                </Container> : 
+                <h1>You have not yet added any students. To add a student click on the menu at the top right and select add student.</h1>
+
             }
         </>
     )

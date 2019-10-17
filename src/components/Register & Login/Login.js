@@ -55,21 +55,21 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2),
   },
   progress: {
-    margin: theme.spacing(2),
+    margin: '50vh', 
   },
 }));
 
 export default function Login(props) {
   const classes = useStyles();
   const [login, setLogin] = useState({ username: '', password: ''})
-  const [isLoading, setIsLoading] = useState( {loading: false} )
+  const [isLoading, setIsLoading] = useState( false )
 
   const handleSubmit = e => {
       e.preventDefault()
-      setIsLoading( {loading: true} )
+      setIsLoading(true)
     axios.post(`https://better-professor-backend.herokuapp.com/users/login`, login)
         .then(res => {
-            setIsLoading( {loading: false} )
+            setIsLoading(false)
             const jsonify = res.config.data
             const usernameO = JSON.parse(jsonify)
             localStorage.setItem('user', usernameO.username)
@@ -89,6 +89,7 @@ export default function Login(props) {
 
 
   return (
+    isLoading ? <CircularProgress className={classes.progress} /> :
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
