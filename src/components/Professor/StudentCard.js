@@ -69,7 +69,21 @@ const StudentCard = ({ list, setStudId }) => {
                         })}
                     </Grid>
                 </Container> : 
-                <h1>You have not yet added any students. To add a student click on the menu at the top right and select add student.</h1>
+                <>                
+                <Container maxWidth='sm'>
+                    <Grid container spacing={3}>
+                            <Grid item xs>
+                                <Card className={classes.card}>
+                                    <CardContent>
+                                        <Typography variant="h5" component="h2">
+                                        You have not yet added any students. To add a student click on the menu at the top right and select add student.
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                    </Grid>
+                </Container>
+            </> 
 
             }
         </>

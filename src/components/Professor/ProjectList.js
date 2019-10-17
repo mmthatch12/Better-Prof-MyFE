@@ -94,7 +94,21 @@ const ProjectList = (props) => {
                     })}
                 </Grid>
             </Container> : 
-            <h1>This student does not have any projects. To add a project click on the menu at the top right and select add project.</h1>
+            <>                
+            <Container maxWidth='sm'>
+                <Grid container spacing={3}>
+                        <Grid item xs>
+                            <Card className={classes.card}>
+                                <CardContent>
+                                    <Typography variant="h5" component="h2">
+                                    This student does not have any projects. To add a project click on the menu at the top right and select add project.
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                </Grid>
+            </Container>
+        </> 
         }
 
             
