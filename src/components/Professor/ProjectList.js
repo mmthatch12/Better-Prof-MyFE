@@ -30,7 +30,10 @@ const useStyles = makeStyles({
       marginBottom: 12,
     },
     progress: {
-        margin: '50vh', 
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        margin: '-50px 0px 0px -50px' 
       },
   });
 
