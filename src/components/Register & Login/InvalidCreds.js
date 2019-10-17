@@ -43,10 +43,11 @@ const useStyles = makeStyles(theme => ({
 
 const InvalidCreds = (props) => {
     const classes = useStyles();
+    console.log('props on inval', props.props.history)
 
-    const onSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault()
-        props.props.history.push('/')
+        window.location.reload()
     }
 
     return (
@@ -60,7 +61,7 @@ const InvalidCreds = (props) => {
                                     The username or password you entered is not valid. Please try again.
                                     </Typography>
                                     <Button
-                                        onClick={onSubmit}
+                                        onClick={handleSubmit}
                                         type="submit"
                                         fullWidth
                                         variant="contained"
