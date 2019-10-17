@@ -62,7 +62,22 @@ const Messages = (props) => {
         <>
             <MessagesListNav id={id} />
             {isLoading ? <CircularProgress className={classes.progress} /> :
-            messages.length === 0 ? <h1>This student does not have any messages. To add a message click on the menu at the top right and select add message.</h1> : 
+            messages.length === 0 ? 
+            <>                
+                <Container maxWidth='sm'>
+                    <Grid container spacing={3}>
+                            <Grid item xs>
+                                <Card className={classes.card}>
+                                    <CardContent>
+                                        <Typography variant="h5" component="h2">
+                                        This student does not have any messages. To add a message click on the menu at the top right and select add message.
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                    </Grid>
+                </Container>
+            </> : 
                 <Container maxWidth='sm'>
                     <Grid container spacing={3}>
                         {messages.map((message, ind) => {
