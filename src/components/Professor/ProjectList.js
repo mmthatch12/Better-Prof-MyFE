@@ -80,7 +80,7 @@ const ProjectList = (props) => {
                                             Project Type: {project.deadline_type}
                                         </Typography>
                                         <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                            Due Date: {project.deadline.slice(5, 7) + '/' + (parseInt(project.deadline.slice(8, 10)) - 1).toString() + '/' + project.deadline.slice(0, 4)}
+                                            Due Date: {project.deadline.slice(5, 7) + '/' + (parseInt(project.deadline.slice(8, 10))).toString() + '/' + project.deadline.slice(0, 4)}
                                         </Typography>
                                         <Typography className={classes.title} color="textSecondary" gutterBottom>
                                             Description: {project.description}

@@ -3,7 +3,7 @@ import AxiosWithAuth from '../../utils/AxiosWithAuth'
 
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker, } from '@material-ui/pickers';
+import { MuiPickersUtilsProvider, KeyboardDatePicker, } from '@material-ui/pickers';
 
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -92,23 +92,23 @@ const AddProject = (props) => {
                         />
                     </Grid>
                     <Grid className={classes.container} item xs={12}>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <Grid container justify="space-around">
-                      <KeyboardDatePicker
-                        disableToolbar
-                        variant="outlined"
-                        format="MM/dd/yyyy"
-                        margin="normal"
-                        name="deadline"
-                        id="date-picker-inline"
-                        value={project.deadline}
-                        onChange={timeChange}
-                        KeyboardButtonProps={{
-                          'aria-label': 'change date',
-                        }}
-                      />
-                    </Grid>
-                  </MuiPickersUtilsProvider>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <Grid container justify="space-around">
+                                <KeyboardDatePicker
+                                    disableToolbar
+                                    variant="outlined"
+                                    format="MM/dd/yyyy"
+                                    margin="normal"
+                                    name="deadline"
+                                    id="date-picker-inline"
+                                    value={project.deadline}
+                                    onChange={timeChange}
+                                    KeyboardButtonProps={{
+                                    'aria-label': 'change date',
+                                    }}
+                                />
+                            </Grid>
+                        </MuiPickersUtilsProvider>
                     </Grid>
                     <Grid className={classes.container} item xs={12}>
                         <TextField

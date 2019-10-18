@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import AxiosWithAuth from '../../utils/AxiosWithAuth'
 
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, KeyboardDatePicker, } from '@material-ui/pickers';
+
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -45,7 +49,7 @@ const defaultMessage = {
 const AddMessages = (props) => {
     const classes = useStyles()
     const id = props.match.params.studentId
-    const [message, setMessage] = useState({...defaultMessage, student_id: id })
+    const [message, setMessage] = useState({...defaultMessage, date: new Date(), student_id: id })
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -59,6 +63,10 @@ const AddMessages = (props) => {
     const handleChange = e => {
         e.preventDefault()
         setMessage({ ...message, [e.target.name]: e.target.value})
+    }
+
+    const timeChange = (date) => {
+      setMessage({ ...message, date: date})
     }
 
     return (
@@ -85,22 +93,24 @@ const AddMessages = (props) => {
                   />
                 </Grid>
                 <Grid className={classes.container} item xs={12}>
-                  <TextField
-                    variant="outlined"
-                    required
-                    fullWidth
-                    name="date"
-                    placeholder='Date'
-                    value={message.date}
-                    onChange={handleChange}
-                    type="datetime-local"
-                    id="date"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </Grid>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <Grid container justify="space-around">
+                            <KeyboardDatePicker
+                                disableToolbar
+                                variant="outlined"
+                                format="MM/dd/yyyy"
+                                margin="normal"
+                                name="date"
+                                id="date-picker-inline"
+                                value={message.date}
+                                onChange={timeChange}
+                                KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                                }}
+                            />
+                        </Grid>
+                    </MuiPickersUtilsProvider>
+                  </Grid>
               </Grid>
               <Button
                 type="submit"
