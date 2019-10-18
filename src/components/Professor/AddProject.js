@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import AxiosWithAuth from '../../utils/AxiosWithAuth'
 
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker, } from '@material-ui/pickers';
+
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -46,7 +50,7 @@ const defaultProject = {
 const AddProject = (props) => {
     const classes = useStyles()
     const id = parseInt(props.match.params.studentId)
-    const [project, setProject] = useState({...defaultProject, student_id: id })
+    const [project, setProject] = useState({...defaultProject, deadline: new Date(), student_id: id })
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -59,6 +63,10 @@ const AddProject = (props) => {
         e.preventDefault()
         setProject({ ...project, [e.target.name]: e.target.value})
     }
+
+    const timeChange = (date) => {
+        setProject({ ...project, deadline: date})
+      }
 
     return (
         <>
@@ -84,21 +92,23 @@ const AddProject = (props) => {
                         />
                     </Grid>
                     <Grid className={classes.container} item xs={12}>
-                        <TextField
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <Grid container justify="space-around">
+                      <KeyboardDatePicker
+                        disableToolbar
                         variant="outlined"
-                        required
-                        fullWidth
+                        format="MM/dd/yyyy"
+                        margin="normal"
                         name="deadline"
-                        placeholder='Deadline'
-                        type="datetime-local"
+                        id="date-picker-inline"
                         value={project.deadline}
-                        onChange={handleChange}
-                        id="deadline"
-                        className={classes.textField}
-                        InputLabelProps={{
-                            shrink: true,
+                        onChange={timeChange}
+                        KeyboardButtonProps={{
+                          'aria-label': 'change date',
                         }}
-                        />
+                      />
+                    </Grid>
+                  </MuiPickersUtilsProvider>
                     </Grid>
                     <Grid className={classes.container} item xs={12}>
                         <TextField

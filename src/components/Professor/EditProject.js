@@ -1,9 +1,9 @@
+import React, { useState, useEffect } from 'react'
+import AxiosWithAuth from '../../utils/AxiosWithAuth'
+
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker, } from '@material-ui/pickers';
-
-import React, { useState, useEffect } from 'react'
-import AxiosWithAuth from '../../utils/AxiosWithAuth'
 
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -137,16 +137,6 @@ const EditProject = (props) => {
                       />
                     </Grid>
                   </MuiPickersUtilsProvider>
-                  {/* <TextField
-                    variant="outlined"
-                    required
-                    fullWidth
-                    name="deadline"
-                    type="datetime-local"
-                    value={eProject.deadline}
-                    onChange={handleChange}
-                    id="deadline"
-                  /> */}
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
