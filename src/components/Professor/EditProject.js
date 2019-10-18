@@ -62,7 +62,7 @@ const EditProject = (props) => {
     const classes = useStyles()
     const studId = parseInt(props.match.params.studid)
     const id = parseInt(props.match.params.projid)
-    const [eProject, setEProject] = useState({ ...defaultProject, student_id: studId })
+    const [eProject, setEProject] = useState({ ...defaultProject, deadline: new Date('2014-08-18T21:11:54'), student_id: studId })
     
 
     useEffect(() => {
