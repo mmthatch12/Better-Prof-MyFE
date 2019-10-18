@@ -21,7 +21,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        mmthatch12
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -144,8 +144,8 @@ export default function Login(props) {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/register" variant="body2">
-                Don't have an account yet? Sign up
+              <Link href='/register' variant="body2">
+                Sign up
               </Link>
             </Grid>
           </Grid>
