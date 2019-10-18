@@ -1,3 +1,7 @@
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker, } from '@material-ui/pickers';
+
 import React, { useState, useEffect } from 'react'
 import AxiosWithAuth from '../../utils/AxiosWithAuth'
 
@@ -59,6 +63,7 @@ const EditProject = (props) => {
     const studId = parseInt(props.match.params.studid)
     const id = parseInt(props.match.params.projid)
     const [eProject, setEProject] = useState({ ...defaultProject, student_id: studId })
+    
 
     useEffect(() => {
         const currProject = props.productList ? props.productList.find(proj => proj.id === id) : false
@@ -79,6 +84,11 @@ const EditProject = (props) => {
       e.preventDefault()
       setEProject({ ...eProject, [e.target.name]: e.target.value})
   }
+
+  const timeChange = (date) => {
+    setEProject({ ...eProject, deadline: date})
+  }
+
 
   const deleteStudent = e => {
     e.preventDefault()
@@ -110,7 +120,24 @@ const EditProject = (props) => {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <Grid container justify="space-around">
+                      <KeyboardDatePicker
+                        disableToolbar
+                        variant="outlined"
+                        format="MM/dd/yyyy"
+                        margin="normal"
+                        name="deadline"
+                        id="date-picker-inline"
+                        value={eProject.deadline}
+                        onChange={timeChange}
+                        KeyboardButtonProps={{
+                          'aria-label': 'change date',
+                        }}
+                      />
+                    </Grid>
+                  </MuiPickersUtilsProvider>
+                  {/* <TextField
                     variant="outlined"
                     required
                     fullWidth
@@ -119,7 +146,7 @@ const EditProject = (props) => {
                     value={eProject.deadline}
                     onChange={handleChange}
                     id="deadline"
-                  />
+                  /> */}
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
