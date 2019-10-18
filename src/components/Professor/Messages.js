@@ -89,7 +89,7 @@ const Messages = (props) => {
                                                 {message.message}
                                             </Typography>
                                             <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                                Project Type: {message.date}
+                                                Date Created: {message.date.slice(5, 7) + '/' + (parseInt(message.date.slice(8, 10)) - 1).toString() + '/' + message.date.slice(0, 4)}
                                             </Typography>
                                         </CardContent>
                                     </Card>
